@@ -5,8 +5,8 @@ topnav:
   items:
     - title: GitHub
       external_url: https://github.com/AdamSturge/Engine 
-   # - title: News
-   #   url: /news
+    - title: Documentation
+      external_url: https://adamsturge.github.io/Engine/
 
 #Topnav dropdowns
 topnav_dropdowns:
