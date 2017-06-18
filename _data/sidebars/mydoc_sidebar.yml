@@ -23,7 +23,7 @@ entries:
     output: web
     folderitems:
 
-    - title: Get started
+    - title: Hello
       url: /index.html
       output: web
       type: homepage
