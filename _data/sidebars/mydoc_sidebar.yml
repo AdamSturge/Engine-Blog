@@ -1,0 +1,34 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: sidebar
+  product: Engine
+  version: 1.0
+  folders:
+
+  - title:
+    output: web
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage
+      output: web
+      type: frontmatter
+    - title:
+      url: /tocpage
+      output: web
+      type: frontmatter
+
+  - title: Overview
+    output: web
+    folderitems:
+
+    - title: Get started
+      url: /index.html
+      output: web
+      type: homepage
+
+#    - title: Introduction
+#      url: /mydoc_introduction.html
+#      output: web
+
