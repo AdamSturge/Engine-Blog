@@ -28,7 +28,11 @@ entries:
       output: web
       type: homepage
 
-#    - title: Introduction
-#      url: /mydoc_introduction.html
-#      output: web
+    - title: Setup
+      url: /mydoc_setup.html
+      output: web
+
+    - title : Mesh
+      url : /mydoc_mesh.html
+      output: web
 
