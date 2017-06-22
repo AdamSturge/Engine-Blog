@@ -36,3 +36,7 @@ entries:
       url : /mydoc_mesh.html
       output: web
 
+    - title : Hello Sphere
+      url : /mydoc_hello_sphere.html
+      output: web
+
