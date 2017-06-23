@@ -170,5 +170,20 @@ As for why the destructor for PhysicsEntity is virtual. Since we plan on using P
 
 Here is the [cpp](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/physics_entity.cpp) file for PhysicsEntity. And here is the updated UV Sphere class [sphere.h](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/include/sphere.h) [sphere.cpp](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/sphere.cpp)
 
+## Results
+To put this all to work lets make a small addition to the render loop from [Hello Sphere](mydoc_hello_sphere.html)
+
+```c++
+Vector3Gf position(cos(glfwGetTime()),sin(glfwGetTime()),0.0f);
+sphere.SetNextPosition(position);
+sphere.UpdateFromBuffers();
+```
+
+<video controls>
+    <source src="./images/Physics Entity/moving_sphere.mp4" type="video/mp4">
+</video>
+
+Although it isn't physics driven motion it's still our first scene with moving objects in it. Pat yourself on the back.
+In the next article we will finally get down to simulating Newton's equations  
 
 {% include links.html %}
