@@ -13,9 +13,12 @@ Last time we created a mesh, now it's time to put it use. Our goal this time wil
 ## UV Sphere
 The kind of sphere we'll be generating is called a UV sphere. There are other, more visually appealing ways to build a sphere, but for our purposes a UV spehere will do. See [here](https://blender.stackexchange.com/questions/72/what-is-the-difference-between-a-uv-sphere-and-an-icosphere) for a discussion of UV spheres vs icospheres
 
-A UV sphere is built by evaluating the parametric equation for a sphere on a grid. 
-For reference a sphere can be parameterized by [3 coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system) (*r*,*u*,*v*). 
-We'll be dealing with a hallow sphere so the radius, *r*, will be fixed. 
+A UV sphere is built by evaluating the parametric equation for a sphere on a grid. Since our model matrix will handle moving the sphere from local coorindates to world coordinates we can without loss of generality place the sphere at the origin of it's local coordinate system.
+
+A sphere can be parameterized by [3 coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system) (*r*,*u*,*v*). 
+We'll be dealing with a hallow sphere so the radius, *r*, will be fixed. *u* can range from [0,2pi] and *v* can range from [0,pi]. 
+You can think of *u* and *v* as longitude and latitude.  
+
 To translate back into cartesian coordinates we make use of the following tranformation rules.
 
 ```
@@ -23,18 +26,14 @@ x = rcos(u)sin(v)
 y = rcos(v)sin(u)
 z = rsin(u)sinv(v)
 ```
-
-*u* can range from [0,2pi] and *v* can range from [-pi,pi]. 
-So in order to generate a sphereical mesh we will simply evaluate the parametric equation on a rectangular *uv* grid
-One last complication is that we might not necessarily always want the sphere to be centered at the origin in local coordinates.
-To address this we simply need to substract the vector pointing to the center of the sphere from the result. See [here](https://en.wikipedia.org/wiki/Translation_of_axes) for more info on origin translations 
-
+So in order to generate a sphereical mesh we will evaluate the parametric equation on a rectangular *uv* grid, and then translate these points into cartesian coordinates
 
 Here's what that looks like in C++
 
 ```c++
-GLfloat radius   = 1.0f;
-Vector3Gf center(0.0f,0.0f,0.0f);
+GLfloat radius = 1.0f;
+GLuint numU = 20;
+GLuint numV = 20;
 
 GLfloat uStart = 0.0f;
 GLfloat vStart = 0.0f;
@@ -59,10 +58,10 @@ for(int i = 0; i < numU; i++)
         GLfloat v = vStart + j*vStep;
         GLfloat vn = (j+1 == numV) ? vEnd : (v + vStep);
 
-        Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)) - center; 
-        Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn)) - center;
-        Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)) - center; 
-        Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn)) - center;
+        Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)); 
+        Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn));
+        Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)); 
+        Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn));
 
         vertices.row(++vIndex) = p0;
         vertices.row(++vIndex) = p1;
@@ -114,10 +113,10 @@ That's the meat of the Sphere class right there. The rest is just trimmings.
 class Sphere  : public Model
 {
     private:
-    GLfloat m_radius;
+        GLfloat m_radius;
         Vector3Gf m_center; 
 
-    void UVSphereMesh(const GLfloat radius, const Vector3Gf center, const GLuint numU, const GLuint numV, Mesh &mesh);    
+    void UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh &mesh);    
 
     public:
         /**
@@ -145,7 +144,7 @@ Sphere::Sphere() : Model()
 {
     m_radius = 1.0f;
     m_center = Vector3Gf(0.0f,0.0f,0.0f);
-    UVSphereMesh(m_radius, Vector3Gf(0.0f,0.0f,0.0f), 20, 20, m_mesh);
+    UVSphereMesh(m_radius, 20, 20, m_mesh);
 };
 
 Sphere::Sphere(GLfloat radius, Vector3Gf position) : Model()
@@ -155,11 +154,11 @@ Sphere::Sphere(GLfloat radius, Vector3Gf position) : Model()
     m_center = position;
 
     m_model_matrix.col(3) << position(0), position(1), position(2), 1.0f; 
-    UVSphereMesh(m_radius, Vector3Gf(0.0f,0.0f,0.0f), 20, 20, m_mesh); // model matrix handles translation of mesh so we use (0,0,0) as mesh center
+    UVSphereMesh(m_radius, 20, 20, m_mesh); // model matrix handles translation of mesh so we use (0,0,0) as mesh center
 
 };
 
-void Sphere::UVSphereMesh(const GLfloat radius, const Vector3Gf center, const GLuint numU, const GLuint numV, Mesh& mesh)
+void Sphere::UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh& mesh)
 {  
     GLfloat uStart = 0.0f;
     GLfloat vStart = 0.0f;
@@ -184,10 +183,10 @@ void Sphere::UVSphereMesh(const GLfloat radius, const Vector3Gf center, const GL
             GLfloat v = vStart + j*vStep;
             GLfloat vn = (j+1 == numV) ? vEnd : (v + vStep);
 
-            Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)) - center; 
-            Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn)) - center;
-            Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)) - center; 
-            Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn)) - center;
+            Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)); 
+            Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn));
+            Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)); 
+            Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn));
 
             vertices.row(++vIndex) = p0;
             vertices.row(++vIndex) = p1;

@@ -32,7 +32,7 @@ entries:
       url: /mydoc_setup.html
       output: web
 
-    - title: Simple Shader
+    - title: Simple shader
       url : /mydoc_simple_shader.html
       output: web
 
@@ -48,7 +48,11 @@ entries:
       url : /mydoc_model.html
       output: web
 
-    - title : Hello Sphere
+    - title : Hello sphere
       url : /mydoc_hello_sphere.html
       output: web
+
+    - title : Lets get physical
+      url : /mydoc_lets_get_physical.html
+      output : web
 
