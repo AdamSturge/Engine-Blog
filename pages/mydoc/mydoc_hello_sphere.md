@@ -88,6 +88,10 @@ for(int i = 0; i < numU; i++)
 mesh = Mesh(vertices,faces);
 ````
 
+Each inner loop creates 2 triangles like so
+
+<img src="./images/Hello Sphere/UV_sphere_triangles.jpg" />
+
 That's the meat of the Sphere class right there. The rest is just trimmings. 
 
 ## Sphere
@@ -270,6 +274,10 @@ while(!glfwWindowShouldClose(window))
     glfwSwapBuffers(window);
 }    
 ````
+
+## Results
+<img src="./images/Hello Sphere/UV_sphere.png" style="width:45%;height:45%;"/>
+<img src="./images/Hello Sphere/UV_sphere_wireframe.png" style="width:45%;height:45%;"/>
 
 ## Full Code
 For the full code you can clone this [branch](https://github.com/AdamSturge/Engine/tree/blog_hello_sphere). You'll want to look at /include/sphere.h /include/mesh.h /include/model.h 
