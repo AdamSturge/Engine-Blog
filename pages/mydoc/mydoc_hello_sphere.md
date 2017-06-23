@@ -1,5 +1,5 @@
 ---
-title: Mesh
+title: Hello Sphere
 summary : "Render a sphere"
 sidebar: mydoc_sidebar
 permalink: mydoc_hello_sphere.html
@@ -22,7 +22,7 @@ To translate back into cartesian coordinates we make use of the following tranfo
 x = rcos(u)sin(v)
 y = rcos(v)sin(u)
 z = rsin(u)sinv(v)
-````
+```
 
 *u* can range from [0,2pi] and *v* can range from [-pi,pi]. 
 So in order to generate a sphereical mesh we will simply evaluate the parametric equation on a rectangular *uv* grid
@@ -86,7 +86,7 @@ for(int i = 0; i < numU; i++)
 }
 
 mesh = Mesh(vertices,faces);
-````
+```
 
 Each inner loop creates 2 triangles like so
 
@@ -135,7 +135,7 @@ class Sphere  : public Model
     
 };
 #endif
-````
+```
 
 ```c++
 #include <sphere.h>
@@ -213,7 +213,7 @@ void Sphere::UVSphereMesh(const GLfloat radius, const Vector3Gf center, const GL
     mesh = Mesh(vertices,faces);
 };
 
-````
+```
 
 ## Rendering
 Without going into details about how OpenGL renders a scene I'll just state the render loop
@@ -273,9 +273,11 @@ while(!glfwWindowShouldClose(window))
 
     glfwSwapBuffers(window);
 }    
-````
+```
 
 ## Results
+Ta da! Just like I promised way back in the [setup](mydoc_setup.html) we've finally rendered something to the screen. We can learn a lot about physical simulation with just this simple sphere. As later articles will show.
+
 <img src="./images/Hello Sphere/UV_sphere.png" style="width:45%;height:45%;"/>
 <img src="./images/Hello Sphere/UV_sphere_wireframe.png" style="width:45%;height:45%;"/>
 

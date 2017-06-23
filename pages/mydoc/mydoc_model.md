@@ -1,5 +1,5 @@
 ---
-title: Mesh
+title: Model
 summary : "Define a model"
 sidebar: mydoc_sidebar
 permalink: mydoc_model.html
@@ -60,7 +60,7 @@ class Model {
     
 };
 #endif
-````
+```
 
 ```c++
 #include <model.h>
@@ -84,5 +84,5 @@ Mesh Model::GetMesh()
 {
     return m_mesh;
 }
-````
+```
 {% include links.html %}

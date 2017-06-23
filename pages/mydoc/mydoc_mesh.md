@@ -109,7 +109,7 @@ class Mesh
     
 };
 #endif
-```` 
+``` 
 I hope most of that is self-evident at this point. The only interesting bits are the use of a typedef to avoid having to write those log Eigen matrix strings everywhere, and the *GenerateVAO* function.
 A **Vertex Array Object** is how OpenGL keeps track of meshes on the GPU. It involves moving the raw data represented by the **V** and **F** matrices to the GPU and telling OpenGL how to read them. 
 The *CleanUp* method is used to remove the mesh from the GPU when it no longer needs to be rendered. 
@@ -197,7 +197,7 @@ void Mesh::CleanUp()
     glDeleteBuffers(1,&m_VBO);
     glDeleteBuffers(1,&m_EBO);
 }
-````
+```
 
 I won't go into detail here on how this code loads and removes data from the GPU since I'm assuming you know the basics of OpenGL already. The only part worth commenting on is the transformation from a face list **F** into an **edge list**. Unfortunately OpenGL doesn't directly support the {**V**,**F**} data structure we've been working with. Instead it expects an edge list of pairs of indicies.
 

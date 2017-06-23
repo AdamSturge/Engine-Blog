@@ -26,4 +26,8 @@ If you've managed to setup all the libraries correctly you should be able to clo
 
 <img src="./images/Setup/empty_window.png" />
 
+## What's ahead
+
+Over the next few articles we will lay down the basis for our Engine. Unfortunately a lot goes into rendering even one triangle so you won't see much by way of visual progress until [Hello Sphere](mydoc_hello_sphere.html). But if you stick with me you'll learn some cool stuff I promise
+
 {% include links.html %}
