@@ -6,20 +6,7 @@ entries:
   version: 1.0
   folders:
 
-  - title:
-    output: web
-    type: frontmatter
-    folderitems:
-    - title:
-      url: /titlepage
-      output: web
-      type: frontmatter
-    - title:
-      url: /tocpage
-      output: web
-      type: frontmatter
-
-  - title: Overview
+  - title: Getting Started
     output: web
     folderitems:
 
@@ -60,3 +47,6 @@ entries:
       url : /mydoc_explicit_euler.html
       output: web
 
+    - title : Scene
+      url : /mydoc_scene.html
+      output : web
