@@ -50,3 +50,7 @@ entries:
     - title : Scene
       url : /mydoc_scene.html
       output : web
+
+    - title : Force generator
+      url : /mydoc_force_generator.html
+      output : web
