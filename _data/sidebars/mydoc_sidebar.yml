@@ -54,3 +54,7 @@ entries:
     - title : Force generator
       url : /mydoc_force_generator.html
       output : web
+
+    - title : Universal gravitation
+      url : /mydoc_universal_gravitation.html
+      output : web
