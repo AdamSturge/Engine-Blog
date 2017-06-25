@@ -36,7 +36,11 @@ The 3D cartesian coordinates of it's vertices are specified by the **V** matrix 
 In practice there are many triangles in a mesh so instead of using nested primative arrays we'll be using Eigen matricies. 
 
 ### A note on ordering
-You'll notice that I drew '<' characters on the triangle edges in the picture above. That is because when we send a triangle to the GPU for rendering OpenGL expects the edges to be ordered counter-clockwise. This requirement is embedded into the ordering we choose for the indices in the **F** matrix. You'll notice that although the vertices are listed as leftmost, rightmost, topmost in **V**, the **F** matrix indexes them as rightmost, leftmost, topmost. That was just to drive home the point this very point.
+You'll notice that I drew '<' characters on the triangle edges in the picture above. 
+That is because when we send a triangle to the GPU for rendering OpenGL expects the edges to be ordered counter-clockwise. 
+This requirement is embedded into the ordering we choose for the indices in the **F** matrix. 
+Although the vertices are listed as leftmost, rightmost, topmost in **V**, the **F** matrix indexes them as rightmost, leftmost, topmost. 
+That was just to drive home the point this very point.
 
 ## Mesh class
 So with all that in mind lets create our Mesh class

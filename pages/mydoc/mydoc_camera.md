@@ -10,7 +10,8 @@ toc : false
 ## Overview
 The camera I use is the camera described on [learnopengl](https://learnopengl.com/#!Getting-started/Camera). I won't repeat what's written there so I encourage you to read that article. 
 
-If you don't want to read the details the long and short of it is that you can move the camera using the arrow keys. And if you uncomment this code in main.cpp you can look around with the mouse.
+If you don't want to read the details the long and short of it is that you can move the camera using W,A,S,D.
+And if you uncomment this code in main.cpp you can look around with the mouse.
 
 ```c++
 glfwSetCursorPosCallback(window,MouseCallback); 

@@ -17,11 +17,13 @@ The aim of this site is to give me a place to write articles that explain the de
 ## What this isn't  
 Since I obviously need to assume some level of prior knowledge I'll state what this site isn't. I will not be teaching you:
 * C++
-* OpenGL
+* Basic OpenGL
 * Linear Algrbra
-* Calculus 
+* (Vector) Calculus 
 * Basic Trigonometry
 
-If you are unfamilar with some of these items there are a wealth of fantastic tutorials online for free. For OpenGL I reccomend [LearnOpgenGL](https://learnopengl.com/)
+If you are unfamilar with some of these items there are a wealth of fantastic tutorials online for free. For OpenGL I reccomend [LearnOpgenGL](https://learnopengl.com/).
+Ideally before reading any further you'd have completed the "Getting Started" section of LearnOpenGL first. 
+But if you comfortable glossing over some of the rendering stuff, or looking it up as you go along, then you should be alright.
 
 {% include links.html %}

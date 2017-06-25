@@ -8,12 +8,12 @@ toc : true
 ---
 
 ## Overview
-Last time we created a mesh, now it's time to put it use. Our goal this time will be to render a sphere onto the screen.
+Last time we created a [model](mydoc_model.html), now it's time to put it use. Our goal this time will be to render a sphere onto the screen.
 
 ## UV Sphere
 The kind of sphere we'll be generating is called a UV sphere. There are other, more visually appealing ways to build a sphere, but for our purposes a UV spehere will do. See [here](https://blender.stackexchange.com/questions/72/what-is-the-difference-between-a-uv-sphere-and-an-icosphere) for a discussion of UV spheres vs icospheres
 
-A UV sphere is built by evaluating the parametric equation for a sphere on a grid. Since our model matrix will handle moving the sphere from local coorindates to world coordinates we can without loss of generality place the sphere at the origin of it's local coordinate system.
+A UV sphere is built by evaluating the [parametric equation](https://en.wikipedia.org/wiki/Parametric_equation) for a sphere on a grid. Since our model matrix will handle moving the sphere from local coorindates to world coordinates we can without loss of generality place the sphere at the origin of it's local coordinate system.
 
 A sphere can be parameterized by [3 coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system) (*r*,*u*,*v*). 
 We'll be dealing with a hallow sphere so the radius, *r*, will be fixed. *u* can range from [0,2pi] and *v* can range from [0,pi]. 
@@ -116,7 +116,7 @@ class Sphere  : public Model
         GLfloat m_radius;
         Vector3Gf m_center; 
 
-    void UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh &mesh);    
+        void UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh &mesh);    
 
     public:
         /**
@@ -221,13 +221,15 @@ Without going into details about how OpenGL renders a scene I'll just state the 
 Sphere sphere(1.0f, Vector3Gf(0.0f,0.0f,0.0f));
 while(!glfwWindowShouldClose(window))
 {
+    // Frame data to smooth out camera movement
     GLfloat current_frame = glfwGetTime();
     delta_time = current_frame - last_frame;
     last_frame = current_frame;
 
     glfwPollEvents();
-    DoMovement();   
+    DoMovement();  // Move cemera 
 
+    // Switch between wireframe and filled rendering
     if(keys[GLFW_KEY_F])
     {
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -243,6 +245,7 @@ while(!glfwWindowShouldClose(window))
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // Use our simple shader
     shader.Use();
 
     Eigen::Matrix<GLfloat,4,4> view;
@@ -255,17 +258,19 @@ while(!glfwWindowShouldClose(window))
     GLint viewLoc = glGetUniformLocation(shader.Program, "view"); 
     GLint projectionLoc = glGetUniformLocation(shader.Program, "projection");
 
+    // Set view and projection matricies in shader
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view.data());
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.data());        
    
+    // Grab Vertex Array Object Id for sphere
     GLuint VAO = sphere.GetMesh().GetVAO();
 
+    // Get model matrix for sphere and set it in shader
     Eigen::Matrix<float,4,4> model_matrix = sphere.GetModelMatrix();
-
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model_matrix.data());
 
+    // Render sphere
     glBindVertexArray(VAO);
-
     glDrawElements(GL_TRIANGLES, 2*sphere.GetMesh().GetNumEdges(), GL_UNSIGNED_INT,0);
 
     glBindVertexArray(0);
@@ -281,7 +286,13 @@ Ta da! Just like I promised way back in the [setup](mydoc_setup.html) we've fina
 <img src="./images/Hello Sphere/UV_sphere_wireframe.png" style="width:45%;height:45%;"/>
 
 ## Full Code
-For the full code you can clone this [branch](https://github.com/AdamSturge/Engine/tree/blog_hello_sphere). You'll want to look at /include/sphere.h /include/mesh.h /include/model.h 
-sphere.cpp mesh.cpp model.cpp and main.cpp
+For the full code you can clone this [branch](https://github.com/AdamSturge/Engine/tree/blog_hello_sphere). You'll want to look at 
+[sphere.h](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/include/sphere.h)
+[mesh.h](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/include/mesh.h)
+[model.h](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/include/model.h)
+[sphere.cpp](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/sphere.cpp) 
+[mesh.cpp](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/mesh.cpp)
+[model.cpp](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/model.cpp)
+ and [main.cpp](https://github.com/AdamSturge/Engine/blob/blog_hello_sphere/main.cpp)
 
 {% include links.html %}

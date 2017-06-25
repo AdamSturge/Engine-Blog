@@ -166,7 +166,8 @@ Most of that should be self explanatory. The *UpdateFromBuffers* method copies t
 This second method allows subclasses to listen for the update event and provide custom actions specific to their own member variables. 
 For example our UV sphere will want to update it's m_center variable to reflect it's new position in world coordinates. 
 
-As for why the destructor for PhysicsEntity is virtual. Since we plan on using PhysicsEntity in a polymorphic manner, and it contains a virtual method, then in order for poitners to properly delete it's destructor [must be virtual](https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors).
+As for why the destructor for PhysicsEntity is virtual.
+Since we plan on using PhysicsEntity in a polymorphic manner, and it contains a virtual method, then in order for pointers to be properly removed from the heap it's destructor [must be virtual](https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors).
 
 Here is the [cpp](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/physics_entity.cpp) file for PhysicsEntity. And here is the updated UV Sphere class [sphere.h](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/include/sphere.h) [sphere.cpp](https://github.com/AdamSturge/Engine/blob/blog_lets_get_physical/sphere.cpp)
 

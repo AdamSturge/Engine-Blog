@@ -20,18 +20,19 @@ In general a force is a 3D vector.
 \vec{F}(\vec{x}(t)) = m\frac{\partial^{2} \vec{x}}{\partial t^{2}}
 \\]
 
-In general you can think of a force as a [force field](https://en.wikipedia.org/wiki/Force_field_(physics)). 
+You can think of a force as a [force field](https://en.wikipedia.org/wiki/Force_field_(physics)). 
 A force field defines the force a particular object experiences as a function of it's position.
-A classic example of this is the magnetic force field lines you see in any good intro science textbook. 
+A classic example of this is the magnetic force field you see in any good intro science textbook. 
 
 <img src="./images/Force Generator/field_lines.gif" />
 <img src="./images/Force Generator/iron_filings.png" />
 
+The arrows define the direction of the force at that point in space.
 In much the same way that a ball floating on the ocean is carried by water currents physical objects are carried through space by force currents.
 
 {%include note.html content="Technically what we have defined is a [conservative force](https://en.wikipedia.org/wiki/Conservative_force).
 Conservative forces only depend on the position of the particle, not on time. It's important to clarify that the position itself is a function of time, so in a manner the force is as well.
-Sometimes people write $$\vec{F}(t)$$ to indicate this implicit dependance on time. However a more accurate way to write it is $$\vec{F(\vec{x}(t)})$$.
+Sometimes people write $$\vec{F}(t)$$ to indicate this implicit dependance on time. However a more accurate way to write it is $$\vec{F}(\vec{x}(t))$$.
 It is possible to have forces that are directly dependant on time, but we won't have any use for them." %}
 
 ## Constant force
@@ -228,4 +229,5 @@ And with that we've completed what I could call our first fully featured physics
 We are computing forces and solving Newton's equations of motion on each frame. 
 And we've done so in an extensible way. 
 Adding new forces is as simple as creating new force generators, and adding new integration schemes merely requires creating a new class that inherits from TimeIntegrator. 
+Congradulations!
 {% include links.html %}

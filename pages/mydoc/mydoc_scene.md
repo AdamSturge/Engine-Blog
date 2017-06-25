@@ -116,7 +116,7 @@ The first use of shared_ptr is in the vector lists of [Model](https://adamsturge
 Although a [Sphere](https://adamsturge.github.io/Engine/classSphere.html) is both a Model and a PhysicsEntity, in general this will not be the case. 
 Anyone who has played video games as encountered the infamous "invisable walls" that represent the boundries of the scene. 
 These walls are physics entites in so far as they have collision physics, but clearly aren't being rendered. 
-Another classic example is foliage that is being rendered but the player can seemlessly pass through.
+Another classic example is foliage that is being rendered but though which the player can seemlessly walk.
 The use of pointers here is primarily to avoid passing around copies of these possibly large entities. Put another way a scene merely tracks the entities, it doesn't own them.
 
 The second use of shard_ptr is because [TimeIntegrator](https://adamsturge.github.io/Engine/classTimeIntegrator.html) is an abstract base class and cannot be constructed directly. 
@@ -230,7 +230,7 @@ We'll need to make some pretty significant changes to our render loop to incorpe
     scene.AddPhysicsEntity(sphere2_ptr);
     scene.AddModel(sphere2_ptr);
 
-    bool start = false; // true is physics is runnings
+    bool start = false; // true is physics is running
     while(!glfwWindowShouldClose(window))
     {
         GLfloat current_frame = glfwGetTime();
@@ -294,7 +294,8 @@ We'll need to make some pretty significant changes to our render loop to incorpe
 
     glfwTerminate();
 ```
-In addition to adding the Scene class this loop now had a "play/pause" button. Press 'p' to toggle the physics simulation between on and off. 
+Much cleaner that before! 
+In addition to adding the Scene class this loop now has a "play/pause" button. Press 'p' to toggle the physics simulation between on and off. 
 
 If everything works you should be greeted with the following
 
