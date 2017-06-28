@@ -18,7 +18,7 @@ Throughout the rest of this article we will be using a subscript $$i$$ to indica
 
 Lets start out by reviewing some basic physics.
 
-## Position
+## Position {#position}
 The rate of change in position $$\frac{\partial x}{\partial t}$$ is commonly refered to as velocity, which we denote $$v(t)$$. Writing out the full definition of the derivative we have
 
 \\[
@@ -40,7 +40,7 @@ This is where we discritize time.
 v \approx \frac{x_{f} - x_{i}}{h}
 \\]
 
-I've purposfully just written $$v$$ on the left hand side of the equation to highlight that we have a choise to make.
+I've purposfully just written $$v$$ on the left hand side of the equation to highlight that we have a choice to make.
 The true velocity is defined at an instant in time, that's what it means to be a derivative. 
 However after we've discretized time we have to choose at what moment this approximation is used, $$t$$ or $$t+h$$. 
 After all since $$h \to 0$$ we could have just as easily written $$v(t+h)$$ on the left hand side of our definition of derivative.
@@ -81,7 +81,7 @@ F_{i} \approx m\frac{v_{f}-v_{i}}{h}
 As was the case for position assuming we know the net force acting on the object at the start of time step we can solve for the unknown velocity $$v_{f}$$
 
 \\[
-v_{f} \approx v_{i} + h\frac{F_{i}}{m}v_{i}
+v_{f} \approx v_{i} + h\frac{F_{i}}{m}
 \\]
 
 This is our update rule for velocity.

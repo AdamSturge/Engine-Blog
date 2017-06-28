@@ -58,3 +58,15 @@ entries:
     - title : Universal gravitation
       url : /mydoc_universal_gravitation.html
       output : web
+
+  - title : Advanced Time Integrators
+    output : web 
+    folderitems :
+    
+    - title: Updated TimeIntegrator
+      url : /mydoc_updated_time_integrator.html
+      output : web
+
+    - title : Symplectic Euler
+      url : /mydoc_symplectic_euler.html
+      output : web
