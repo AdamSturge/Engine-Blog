@@ -70,3 +70,7 @@ entries:
     - title : Symplectic Euler
       url : /mydoc_symplectic_euler.html
       output : web
+
+    - title : Verlet
+      url : /mydoc_verlet.html
+      output: web
