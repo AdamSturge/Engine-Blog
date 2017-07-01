@@ -85,7 +85,7 @@ The Verlet update rules I've given you (sometimes refered to as velocity Verlet)
 
 <sub>
 \* You might think it'd be $$\mathcal{O}(h^{3})$$ but it turns out the $$h^{3}$$ terms [cancel out](https://en.wikipedia.org/wiki/Verlet_integration#Discretization_error). 
-Just use $$v(t) = \frac{x_{n+1}-x_{n}}{h}$$
+Just use $$v_{n} = \frac{x_{n}-x_{n-1}}{h}$$ in the position equation
 </sub>
 
 Whereas Symplectic Euler has the following error orders:
