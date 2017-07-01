@@ -80,8 +80,13 @@ The Verlet update rules I've given you (sometimes refered to as velocity Verlet)
 
 |Quanity|Local error|Global error|
 |-------|--------|---------|
-|$$x(t)$$|$$\mathcal{O}(h^{4})$$|$$\mathcal{O}(h^{2})$$|
+|$$x(t)$$|$$\mathcal{O}(h^{4})^{*}$$|$$\mathcal{O}(h^{2})$$|
 |$$v(t)$$|$$\mathcal{O}(h^{2})$$|$$\mathcal{O}(h^{2})$$|
+
+<sub>
+\* You might think it'd be $$\mathcal{O}(h^{3})$$ but it turns out the $$h^{3}$$ terms [cancel out](https://en.wikipedia.org/wiki/Verlet_integration#Discretization_error). 
+Just use $$v(t) = \frac{x_{n+1}-x_{n}}{h}$$
+</sub>
 
 Whereas Symplectic Euler has the following error orders:
 
