@@ -49,7 +49,7 @@ Often a bound on the order of the global error is the best that can be done.
 While technically it would be more accurate to say "the global error is no worse than $$\mathcal{O}(h^{2})$$" people tend to say "the global error is $$\mathcal{O}(h^{2})$$".
 This [pdf](http://www.math.unl.edu/~gledder1/Math447/EulerError) has a detailed walkthrough of local and global error analysis for Explict Euler
 
-## Verlet Integration
+## Verlet Integration {#verlet_integration}
 Verlet integration includes terms up to second order for $$x(t)$$
 
 \\[
