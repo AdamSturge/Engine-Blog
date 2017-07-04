@@ -103,7 +103,7 @@ void Scene::ComputeNetForce(const std::shared_ptr<PhysicsEntity> entity_ptr, Vec
     }
 };
 ```
-Where we've been careful not the apply the allow gravitational self interaction.
+Where we've been careful not to allow gravitational self interaction.
 
 ## Orbits
 Now that we've implemented gravitational attraction lets do something fun. 
