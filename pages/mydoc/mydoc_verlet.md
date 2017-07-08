@@ -151,13 +151,13 @@ Since the error is a function of $$h$$ we'll keep it fairly large (in comparisio
 
 ### Symplectic Euler
 <video controls>
-    <source src="./images/Verlet/symplectic euler.mp4" />
+    <source src="./images/Verlet/symplectic_euler.webm" type="video/webm"/>
 </video>
 As you can see the errors build up until the orbiting body is flung off into space.
 
 ### Verlet
 <video controls>
-    <source src="./images/Verlet/verlet.mp4" />
+    <source src="./images/Verlet/verlet.webm" type="video/webm" />
 </video>
 Although the moon moves a great distance with each simulation step, the $$\mathcal{O}(h^{2})$$ global error keeps the orbit from becoming unstable during the simulation.
 

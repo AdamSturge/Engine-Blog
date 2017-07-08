@@ -300,7 +300,7 @@ In addition to adding the Scene class this loop now has a "play/pause" button. P
 If everything works you should be greeted with the following
 
 <video controls>
-    <source src="./images/Scene/two_spheres.mp4" />
+    <source src="./images/Scene/two_spheres.webm" type="video/webm" />
 </video>
 
 Here is the full source [code](https://github.com/AdamSturge/Engine/tree/blog_scene)

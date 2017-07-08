@@ -181,7 +181,7 @@ sphere.UpdateFromBuffers();
 ```
 
 <video controls>
-    <source src="./images/Physics Entity/moving_sphere.mp4" type="video/mp4">
+    <source src="./images/Physics Entity/moving_sphere.webm" type="video/webm">
 </video>
 
 Although it isn't physics driven motion it's still our first scene with moving objects in it. Pat yourself on the back.

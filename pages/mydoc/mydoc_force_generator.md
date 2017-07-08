@@ -220,7 +220,7 @@ void Scene::ComputeNetForce(const std::shared_ptr<PhysicsEntity> entity_ptr, Vec
 If you update main.cpp to utilize the new ConstantForceGenerator and give it a downward force vector of $$(0,-9.81,0)$$ you should see something like this.
 
 <video controls>
-    <source src="./images/Force Generator/gravity_sim.mp4" />
+    <source src="./images/Force Generator/gravity_sim.webm" type="video/webm" />
 </video>
 
 Here is the full [code](https://github.com/AdamSturge/Engine/tree/blog_force_generator).

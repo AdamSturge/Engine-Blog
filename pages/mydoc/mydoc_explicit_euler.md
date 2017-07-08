@@ -289,7 +289,7 @@ sphere.UpdateFromBuffers();
 
 You should be greated with something like the following
 <video controls>
-    <source src="./images/Explicit Euler/Explicit_Euler.mp4" />
+    <source src="./images/Explicit Euler/Explicit_Euler.webm" type="video/webm" />
 </video>
 
 If so, congradulations! You've successfully completed your first real physics simulation.

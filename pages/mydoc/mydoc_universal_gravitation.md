@@ -140,7 +140,7 @@ Using this formula we can set up our scene so one sphere orbits the other.
 If everything works correctly you should see this
 
 <video controls>
-    <source src="./images/Universal Gravitation/orbit.mp4"  type="video/mp4"/>
+    <source src="./images/Universal Gravitation/orbit.webm" type="video/webm"/>
 </video>
 
 Whoops! The orbit isn't stable. It keeps growing with each pass. Why is this happening? Could there a be a problem with the code. Or worse yet physics?! 

@@ -110,7 +110,7 @@ It's so simular to Explicit Euler there's no point in talking about it in detail
 ## Results
 
 <video controls>
-    <source src="./images/Symplectic Euler/stable_orbit.mp4" />
+    <source src="./images/Symplectic Euler/stable_orbit.webm" type="video/webm" />
 </video>
 
 After implementing Symplectic Euler our orbits are much more stable.
