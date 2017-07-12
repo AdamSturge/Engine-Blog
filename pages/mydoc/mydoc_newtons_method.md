@@ -93,7 +93,7 @@ Unfortunately for us we don't have a simple function of 1 variable. Recall that 
 \\[
 y_{n+1} - y_{n} - hf(t_{n+1},y_{n+1}) = 0
 \\]
-where $$y = (x,v)$$. 
+where $$y = (x,v) \in \mathbb{R}^{6}$$. 
 Introducting some notation:
 \\[
 G(y_{n+1}) 
@@ -132,10 +132,32 @@ $$\nabla G(z_{i})$$ is the [Jacobian matrix](https://en.wikipedia.org/wiki/Jacob
 \end{bmatrix}
 = 
 \begin{bmatrix}
-1 & h \\\
--\frac{h}{m}\frac{\partial F}{\partial x_{n+1}} & 1 - \frac{h}{m}\frac{\partial F}{\partial v_{n+1}}
+I & H \\\
+-\frac{h}{m}\frac{\partial F}{\partial x_{n+1}} & I - \frac{h}{m}\frac{\partial F}{\partial v_{n+1}}
 \end{bmatrix}
 \\] 
+
+Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
+\\[
+\frac{\partial F}{\partial x_{n+1}}
+=
+\begin{bmatrix}
+\frac{\partial F_{x}}{\partial x_{n+1,x}} & \frac{\partial F_{x}}{\partial x_{n+1,y}} & \frac{\partial F_{x}}{\partial x_{n+1,z}} \\\
+\frac{\partial F_{y}}{\partial x_{n+1,x}} & \frac{\partial F_{y}}{\partial x_{n+1,y}} & \frac{\partial F_{y}}{\partial x_{n+1,z}} \\\  
+\frac{\partial F_{z}}{\partial x_{n+1,x}} & \frac{\partial F_{z}}{\partial x_{n+1,y}} & \frac{\partial F_{z}}{\partial x_{n+1,z}}
+\end{bmatrix}
+\\]
+
+\\[
+\frac{\partial F}{\partial v_{n+1}}
+=
+\begin{bmatrix}
+\frac{\partial F_{x}}{\partial v_{n+1,x}} & \frac{\partial F_{x}}{\partial v_{n+1,y}} & \frac{\partial F_{x}}{\partial v_{n+1,z}} \\\
+\frac{\partial F_{y}}{\partial v_{n+1,x}} & \frac{\partial F_{y}}{\partial v_{n+1,y}} & \frac{\partial F_{y}}{\partial v_{n+1,z}} \\\  
+\frac{\partial F_{z}}{\partial v_{n+1,x}} & \frac{\partial F_{z}}{\partial v_{n+1,y}} & \frac{\partial F_{z}}{\partial v_{n+1,z}}
+\end{bmatrix}
+\\]
+
 
 Recall that our goal is $$z_{i+1}$$.
 In the vector valued case Newton's method is a [system of linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations) of the form $$A\delta = b$$.
