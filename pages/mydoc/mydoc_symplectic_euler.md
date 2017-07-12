@@ -104,7 +104,7 @@ In fact they had to turn the step size on Symplectic Euler way up to make the wi
 
 
 Here's the code for Symplectic Euler ([.h](https://github.com/AdamSturge/Engine/blob/blog_symplectic_euler/include/symplectic_euler.h),[.cpp](https://github.com/AdamSturge/Engine/blob/blog_symplectic_euler/symplectic_euler.cpp)). 
-It's so simular to Explicit Euler there's no point in talking about it in detail.
+It's so similar to Explicit Euler there's no point in talking about it in detail.
 
 
 ## Results
