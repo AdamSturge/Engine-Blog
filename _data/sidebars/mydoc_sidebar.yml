@@ -78,3 +78,7 @@ entries:
     - title : Backward Euler (theory)
       url : /mydoc_backward_euler_theory.html
       output : web
+
+    - title : Newton's Method
+      url : /mydoc_newtons_method.html
+      output : web

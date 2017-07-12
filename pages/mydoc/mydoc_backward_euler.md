@@ -70,6 +70,10 @@ First lets lay down some defintions
 Put another way A-stable means that no matter which $$h$$ value you select the approximate solution will always decay to $$0$$ in the same way as the exact solution for the toy model.
 L-stable is an additional restriction on A-stable that ensures a smoother decay to $$0$$.
 
+The stability region for Backward Euler is
+
+<a title="By Jitse Niesen (Own work) [CC0], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3AStability_region_for_BDF1.svg"><img width="512" alt="Stability region for BDF1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Stability_region_for_BDF1.svg/512px-Stability_region_for_BDF1.svg.png"/></a>
+
 To derive Backward Euler we are going to use a similar trick as we used for the velocity update rule in the [Verlet](mydoc_verlet.html#verlet_integration) article.
 \\[
 y_{n+1} = y_{n} + \int\limits_{t}^{t+h}\dot{y}(\tau)d\tau
