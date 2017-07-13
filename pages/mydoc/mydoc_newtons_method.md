@@ -108,7 +108,7 @@ X(x_{n+1},v_{n+1}) \\\
 V(x_{n+1},v_{n+1})
 \end{bmatrix}
 \\]
-So we want to find the root, $$y_{n+1}$$, of the vector valued funciton $$G:\mathbb{R}^{2} \to \mathbb{R}^{2}$$.
+So we want to find the root of the vector valued funciton $$G:\mathbb{R}^{2} \to \mathbb{R}^{2}$$.
 To do this we will make use of the generalization of Newton's Method.
  
 {% include note.html content="I am being a little more general here than usual by writing $$F(x_{n+1},v_{n+1})$$ instead of $$F(x_{n+1})$$. 
