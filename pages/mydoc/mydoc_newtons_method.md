@@ -137,7 +137,7 @@ I & hI \\\
 \end{bmatrix}
 \\] 
 
-Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
+Where $$I$$ is the $$3 \times 3$$ identity matrix and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
 \\[
 \frac{\partial F}{\partial x_{n+1}}
 =
