@@ -132,7 +132,7 @@ $$\nabla G(z_{i})$$ is the [Jacobian matrix](https://en.wikipedia.org/wiki/Jacob
 \end{bmatrix}
 = 
 \begin{bmatrix}
-I & H \\\
+I & hI \\\
 -\frac{h}{m}\frac{\partial F}{\partial x_{n+1}} & I - \frac{h}{m}\frac{\partial F}{\partial v_{n+1}}
 \end{bmatrix}
 \\] 
