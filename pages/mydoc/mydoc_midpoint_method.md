@@ -9,7 +9,7 @@ toc : true
 
 ## Overview
 After all our work on [Backward Euler](mydoc_backward_euler_implementation.html) it turns out to bleed away energy in our orbiti simulation.
-Fortunately there's a easy to implement method that uses Backward Euler has a subroutine that is sympletic. 
+Fortunately there's a easy to implement symplectic method that uses Backward Euler has a subroutine. 
 The so called [Implicit Mipoint Method](https://en.wikipedia.org/wiki/Midpoint_method). 
 The Implicit Midpoint Method is the lowest tier of [Gauss-Legendre Methods](https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_method).
 All the Guass-Legendre methods are symplectic and A-stable. 

@@ -108,6 +108,7 @@ G(\vec{y}\_{n+1})
 \vec{V}(\vec{x}\_{n+1},\vec{v}\_{n+1})
 \end{bmatrix}
 \\]
+
 So we want to find the root, $$\vec{y}_{n+1}$$ of the vector valued funciton $$G:\mathbb{R}^{6} \to \mathbb{R}^{6}$$.
 To do this we will make use of the generalization of Newton's Method.
  
@@ -132,12 +133,12 @@ $$\nabla G(\vec{z}_{i})$$ is the [Jacobian matrix](https://en.wikipedia.org/wiki
 \end{bmatrix}
 = 
 \begin{bmatrix}
-I & H \\\
+I & hI \\\
 -\frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{x}\_{n+1}} & I - \frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{v}\_{n+1}}
 \end{bmatrix}
 \\] 
 
-Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
+Where $$I$$ is the $$3 \times 3$$ identity matrix and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
 \\[
 \frac{\partial \vec{F}}{\partial \vec{x}\_{n+1}}
 =

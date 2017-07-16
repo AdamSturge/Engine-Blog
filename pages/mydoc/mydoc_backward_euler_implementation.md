@@ -145,7 +145,7 @@ Recalling the form of the jacobian $$\nabla G$$ implementing *ComputeJacobian* i
 \nabla G =
 \begin{bmatrix}
 I & hI \\\
--\frac{h}{m}\frac{\partial F}{\partial x_{n+1}} & I - \frac{h}{m}\frac{\partial F}{\partial v_{n+1}}
+-\frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{x}\_{n+1}} & I - \frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{v}\_{n+1}}
 \end{bmatrix}
 \\] 
 
@@ -221,9 +221,6 @@ void BackwardEuler::Solve(const Scene& scene,const std::shared_ptr<PhysicsEntity
 
         diff = delta.squaredNorm();
      }
-
-    entity_ptr->SetPosition(xi);
-    entity_ptr->SetVelocity(vi);
 
     entity_ptr->SetNextPosition(xf);
     entity_ptr->SetNextVelocity(vf);
