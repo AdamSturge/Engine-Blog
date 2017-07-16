@@ -90,3 +90,7 @@ entries:
     - title : Midpoint Method
       url : /mydoc_midpoint_method.html
       output : web
+      
+    - title : Summary
+      url : /mydoc_advanced_integrator_summary.html
+      output : web
