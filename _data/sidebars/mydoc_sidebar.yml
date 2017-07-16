@@ -82,3 +82,11 @@ entries:
     - title : Newton's Method
       url : /mydoc_newtons_method.html
       output : web
+
+    - title : Backward Euler (implementation)
+      url : /mydoc_backward_euler_implementation.html
+      output : web
+
+    - title : Midpoint Method
+      url : /mydoc_midpoint_method.html
+      output : web

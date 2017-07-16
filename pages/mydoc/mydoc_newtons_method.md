@@ -91,55 +91,55 @@ Afterall $$\varepsilon_{i+1}$$ is proportional to $$\varepsilon_{i}^{2}$$.
 ## Newton's method for vector valued functions
 Unfortunately for us we don't have a simple function of 1 variable. Recall that our update rule for Backward Euler is 
 \\[
-y_{n+1} - y_{n} - hf(t_{n+1},y_{n+1}) = 0
+\vec{y}\_{n+1} - \vec{y}\_{n} - hf(t_{n+1},\vec{y}\_{n+1}) = 0
 \\]
-where $$y = (x,v) \in \mathbb{R}^{6}$$. 
+where $$\vec{y} = (\vec{x},\vec{v}) \in \mathbb{R}^{6}$$. 
 Introducting some notation:
 \\[
-G(y_{n+1}) 
+G(\vec{y}\_{n+1}) 
 =
 \begin{bmatrix}
-x_{n+1} - x_{i} - hv_{n+1} \\\
-v_{n+1} - v_{n} - h\frac{F(x_{n+1},v_{n+1})}{m}
+\vec{x}\_{n+1} - \vec{x}\_{i} - h\vec{v}\_{n+1} \\\
+\vec{v}\_{n+1} - \vec{v}\_{n} - h\frac{\vec{F}(\vec{x}\_{n+1},\vec{v}\_{n+1})}{m}
 \end{bmatrix}
 =
 \begin{bmatrix}
-X(x_{n+1},v_{n+1}) \\\
-V(x_{n+1},v_{n+1})
+\vec{X}(\vec{x}\_{n+1},\vec{v}\_{n+1}) \\\
+\vec{V}(\vec{x}\_{n+1},\vec{v}\_{n+1})
 \end{bmatrix}
 \\]
-So we want to find the root, $$y_{n+1}$$ of the vector valued funciton $$G:\mathbb{R}^{2} \to \mathbb{R}^{2}$$.
+So we want to find the root, $$\vec{y}_{n+1}$$ of the vector valued funciton $$G:\mathbb{R}^{6} \to \mathbb{R}^{6}$$.
 To do this we will make use of the generalization of Newton's Method.
  
-{% include note.html content="I am being a little more general here than usual by writing $$F(x_{n+1},v_{n+1})$$ instead of $$F(x_{n+1})$$. 
+{% include note.html content="I am being a little more general here than usual by writing $$\vec{F}(\vec{x}_{n+1},\vec{v}_{n+1})$$ instead of $$\vec{F}(\vec{x}_{n+1})$$. 
 As I spoke about in [force generators](mydoc_force_generator.html) most of the forces we deal with only depend on position.
 However for the purposes of this article we will allow for a velocity dependence as well. 
 That way if we ever add forces that depend on velocity in the future we won't have to update our method" %}
 
-At this point the subscript notation gets a little hairy. Let $$z_{i}$$ be the $$i^{th}$$ approximation to $$y_{n+1}$$. 
+At this point the subscript notation gets a little hairy. Let $$\vec{z}_{i}$$ be the $$i^{th}$$ approximation to $$\vec{y}_{n+1}$$. 
 Then the generalized Newton's method is
 \\[
-\nabla G(z_{i}) (z_{i+1} - z_{i})= -G(z_{i})
+\nabla G(\vec{z}\_{i}) (\vec{z}\_{i+1} - \vec{z}\_{i})= -G(\vec{z}\_{i})
 \\]
 
-$$\nabla G(z_{i})$$ is the [Jacobian matrix](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant) of $$G$$ evaluated at $$z_{i}$$.
+$$\nabla G(\vec{z}_{i})$$ is the [Jacobian matrix](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant) of $$G$$ evaluated at $$\vec{z}_{i}$$.
 
 \\[
 \nabla G =
 \begin{bmatrix}
-\frac{\partial X}{\partial x_{n+1}} & \frac{\partial X}{\partial v_{n+1}} \\\
-\frac{\partial V}{\partial x_{n+1}} & \frac{\partial V}{\partial v_{n+1}} 
+\frac{\partial \vec{X}}{\partial \vec{x}\_{n+1}} & \frac{\partial \vec{X}}{\partial \vec{v}\_{n+1}} \\\
+\frac{\partial \vec{V}}{\partial \vec{x}\_{n+1}} & \frac{\partial \vec{V}}{\partial \vec{v}\_{n+1}} 
 \end{bmatrix}
 = 
 \begin{bmatrix}
 I & H \\\
--\frac{h}{m}\frac{\partial F}{\partial x_{n+1}} & I - \frac{h}{m}\frac{\partial F}{\partial v_{n+1}}
+-\frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{x}\_{n+1}} & I - \frac{h}{m}\frac{\partial \vec{F}}{\partial \vec{v}\_{n+1}}
 \end{bmatrix}
 \\] 
 
 Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the derivatives of the $$F$$ are $$3 \times 3 $$ Jacobians. 
 \\[
-\frac{\partial F}{\partial x_{n+1}}
+\frac{\partial \vec{F}}{\partial \vec{x}\_{n+1}}
 =
 \begin{bmatrix}
 \frac{\partial F_{x}}{\partial x_{n+1,x}} & \frac{\partial F_{x}}{\partial x_{n+1,y}} & \frac{\partial F_{x}}{\partial x_{n+1,z}} \\\
@@ -149,7 +149,7 @@ Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the deri
 \\]
 
 \\[
-\frac{\partial F}{\partial v_{n+1}}
+\frac{\partial \vec{F}}{\partial \vec{v}\_{n+1}}
 =
 \begin{bmatrix}
 \frac{\partial F_{x}}{\partial v_{n+1,x}} & \frac{\partial F_{x}}{\partial v_{n+1,y}} & \frac{\partial F_{x}}{\partial v_{n+1,z}} \\\
@@ -159,9 +159,9 @@ Where $$I$$ is the $$3 \times 3$$ identity matrix, $$H$$ is $$hI$$, and the deri
 \\]
 
 
-Recall that our goal is $$z_{i+1}$$.
-In the vector valued case Newton's method is a [system of linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations) of the form $$A\delta = b$$.
-If we can solve this system for $$\delta = z_{i+1} - z_{i}$$ then we can find $$z_{i+1}$$ by writing $$z_{i+1} = z_{i} + \delta$$.
+Recall that our goal is $$\vec{z}_{i+1}$$.
+In the vector valued case Newton's method is a [system of linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations) of the form $$A\vec{\delta} = \vec{b}$$.
+If we can solve this system for $$\vec{\delta} = \vec{z}_{i+1} - \vec{z}_{i}$$ then we can find $$\vec{z}_{i+1}$$ by writing $$\vec{z}_{i+1} = \vec{z}_{i} + \delta$$.
 Solving a system of linear equations is a well studied problem that I won't go into detail on. 
 Safe to say the the Eigen library has many built in methods for solving this kind of problem, so we will be leveraging those. 
 
