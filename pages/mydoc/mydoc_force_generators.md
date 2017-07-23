@@ -1,8 +1,8 @@
 ---
-title: Force generator
+title: Force generators
 summary : "Adding a constant downward force to the scene"
 sidebar: mydoc_sidebar
-permalink: mydoc_force_generator.html
+permalink: mydoc_force_generators.html
 folder: mydoc
 toc : true
 ---

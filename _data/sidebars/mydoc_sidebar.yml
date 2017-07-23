@@ -51,8 +51,8 @@ entries:
       url : /mydoc_scene.html
       output : web
 
-    - title : Force generator
-      url : /mydoc_force_generator.html
+    - title : Force generators
+      url : /mydoc_force_generators.html
       output : web
 
     - title : Universal gravitation
@@ -94,3 +94,17 @@ entries:
     - title : Summary
       url : /mydoc_advanced_integrator_summary.html
       output : web
+
+  - title  : More Forces
+    output : web
+    folderitems :
+
+    - title : Force Accumulator
+      url : /mydoc_force_accumulator.html
+      output : web
+
+    - title : Linear Drag
+      url : /mydoc_linear_drag_force.html
+      output : web
+
+
