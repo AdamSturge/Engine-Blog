@@ -106,5 +106,9 @@ entries:
     - title : Linear Drag
       url : /mydoc_linear_drag_force.html
       output : web
+    
+    - title : Hooke's law
+      url : /mydoc_hookes_law.html
+      output : web
 
 
