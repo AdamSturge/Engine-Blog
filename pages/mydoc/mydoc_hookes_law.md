@@ -30,7 +30,7 @@ $$l = ||\vec{x}_{2} - \vec{x}_{1}||$$
 and as always $$\hat{n} = \frac{\vec{x}_{2} - \vec{x}_{1}}{||\vec{x}_{2} - \vec{x}_{1}||}$$
 
 ### Jacobian
-The Jacobians for Hooke's law is
+The Jacobians for Hooke's law are
 \\[
 \frac{\partial \vec{F}}{\partial \vec{x}} = -k(\hat{n}\hat{n}^{T} - \frac{(l - l_{0})}{l}(I - \hat{n}\hat{n}^{T}))
 \\]
