@@ -316,7 +316,7 @@ Here's a video of the same system using *Verlet* integration
     <source src="./images/Hookes Law/hookes law verlet.webm" type="video/webm" />
 </video>
 
-Notice how the appex of the movement of the spheres get closer/further apart over time? 
+Notice how the appex of the movement of the spheres gets closer/further apart over time? 
 The Energy in a spring is directly proportional to the amount of compression it stores. 
 The fact the spheres are compressing/stretching the spring more means they are slowly adding energy to the system. 
 Recall that symplectic methods only **nearly** conserve energy.
