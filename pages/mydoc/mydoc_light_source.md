@@ -11,6 +11,7 @@ toc : true
 I think it's time to spruce up our simulation a little. 
 Up until this point we've been making due with omipresent, omidirectional, uniform strength light. 
 In this article we will be removing the first inaccuracy by creating a uniform strength light source that radiates light out in all directions from it's center point.
+To do this we will be implementing the [Phong Reflection Model](https://en.wikipedia.org/wiki/Phong_reflection_model).
 The meat of this article is taken directly from [learnopengl](https://learnopengl.com/#!Lighting/Basic-Lighting).
 Instead of repeating it all here I'm going to focus on the specifics of implementing it within the framework we've built so far.
 I suggest you take the time to read the original article.
@@ -36,41 +37,14 @@ struct Light
 };
 #endif
 ```
-The cpp file just assigns the constructor parameters to the member functions.
-
-## Scene
-Scene will be modified to store a reference to the light source for the simulation.
-```c++
-class Scene
-{
-    private:
-        std::vector<std::shared_ptr<PhysicsEntity>> m_physics_entity_ptrs;
-        std::vector<std::shared_ptr<Model>> m_model_ptrs;
-        std::shared_ptr<TimeIntegrator> m_time_integrator;
-
-        NetForceAccumulator m_net_force_accumulator;
-
-        Light m_light;
-
-    public: 
-
-    // Same as before
-
-    /**
-        Sets the light for the scene
-        @param light the light source
-    **/
-    void SetLight(Light light);
-
-```
-The cpp file just implements the setter for the light source
+The cpp file just assigns the constructor parameters to the member variables.
 
 ## Normals
-In order to compute diffuse lighting we'll be needing normal vectors for each vertex in our model.
-In principle they can be computed at runtime as described [here](https://stackoverflow.com/questions/6656358/calculating-normals-in-a-triangle-mesh/6661242#6661242)
-However they are usually computed once and save in the model file.
-Since we haven't been saving our model file but generating the vertices at runtime (which is only because I've been too lazy to deal with file IO yet) we'll be leaning more towards computing them at runtime. 
-However since we are dealing with a specific geometric shape, a sphere, we can use this a-priori knowledge to simplify the calculation.
+In order to compute diffuse and specular lighting we'll be needing normal vectors for each vertex in our model.
+They can be computed at runtime as described [here](https://stackoverflow.com/questions/6656358/calculating-normals-in-a-triangle-mesh/6661242#6661242).
+Since we've been generating the vertices at runtime (which is only because I've been too lazy to deal with file IO) we'll be computing them for now.
+However they are usually computed once and saved in the model file.
+Since we are dealing with a specific geometric shape, a sphere, we can use this a-priori knowledge to simplify the calculation.
 With a moments consideration it should become clear that the normal to point on a sphere is the vector connecting that point to the center of the sphere. 
 Since our spheres are centered at the origin in local coordinates that means the point representation of the vertex is actually the (unnormalized) normal vector. 
 
@@ -234,12 +208,11 @@ void main()
 ### Fragment Shader
 In the fragment shader we'll be computing the effect of the light source on that fragment. 
 The details of this calculation are specified in the article linked at the top.
-
+Most notably for us we will need to set the required uniforms. 
 ```c++
 #version 330 core
 struct Light{
     vec3 position;
-
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -275,10 +248,75 @@ void main()
     color = vec4(result,1.0f);
 }
 ```
+## Scene
+Scene will be modified in 2 ways. 
+It will now contain a light source, and it will need to set the fragment shader uniforms used during light source computations.
+```c++
+class Scene
+{
+    private:
+        std::vector<std::shared_ptr<PhysicsEntity>> m_physics_entity_ptrs;
+        std::vector<std::shared_ptr<Model>> m_model_ptrs;
+        std::shared_ptr<TimeIntegrator> m_time_integrator;
+
+        NetForceAccumulator m_net_force_accumulator;
+
+        Light m_light;
+
+    public: 
+
+    /**
+        Sets the light for the scene
+        @param light the light source
+    **/
+    void SetLight(Light light);
+
+     /**
+        Renders the Models in the Scene to the screen
+        @param shader shader to use to render scene
+        @param view_pos position scene is being viewed from
+    **/
+    void Render(Shader shader, Vector3Gf view_pos);
+
+    // Same as before
+
+```
+
+```c++
+void Scene::SetLight(Light light)
+{
+    m_light = light;
+}
+
+void Scene::Render(Shader shader, Vector3Gf view_pos)
+{
+    glUniform3f(glGetUniformLocation(shader.Program,"light.ambient"),m_light.ambient(0),m_light.ambient(1),m_light.ambient(2));
+
+    glUniform3f(glGetUniformLocation(shader.Program,"light.diffuse"),m_light.diffuse(0),m_light.diffuse(1),m_light.diffuse(2));
+
+    glUniform3f(glGetUniformLocation(shader.Program,"light.position"),m_light.position(0),m_light.position(1),m_light.position(2));
+
+    glUniform3f(glGetUniformLocation(shader.Program,"viewPos"),view_pos(0), view_pos(1), view_pos(2));
+
+    // Same as before
+}
+
+```
 
 ## Results
 And we're done.
 Honestly that turned out to be a lot more than I expected. 
 But at least we got to refamilarize ourselves with some of the lower level entities of our engine.
+To test our new light source out lets center a spring on one and turn off ambient lighting. 
+
+<video controls>
+    <source src="./images/Light Source/light source.webm" type="video/webm" />
+</video>
+
+Works as you would expect right? 
+As the spheres move away from the light source the angles between the light source and the fragments change, resulting in a varying appearence. 
+
+[code](https://github.com/AdamSturge/Engine/tree/blog_light_source)
+
 
 {% include links.html %}
