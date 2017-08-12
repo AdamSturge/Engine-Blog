@@ -111,4 +111,12 @@ entries:
       url : /mydoc_hookes_law.html
       output : web
 
+  - title  : Basic Lighting
+    output : web
+    folderitems :
+
+    - title : Light Source
+      url : /mydoc_light_source.html
+      output : web
+
 
