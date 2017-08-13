@@ -119,4 +119,6 @@ entries:
       url : /mydoc_light_source.html
       output : web
 
-
+    - title : Material
+      url : /mydoc_material.html
+      output : web
