@@ -24,14 +24,14 @@ V = [[-1,0,0],
     [1,0,0],
     [0,1,0]]
 
-F = [[1,0,2]]
+F = [[1,2,0]]
 </pre>
 
 This mesh corresponds to a triangle pictured below.
 
 <img src="./images/Mesh/simple_triangle_mesh.jpg" />
 
-The 3D cartesian coordinates of it's vertices are specified by the **V** matrix in (x,y,z) notation. However it alone just tells us where the points are in space. It's the role of the **F** matrix to let us know that these 3 points are actually the vertices of a triangle. The values in the **F** matrix are indices into the **V** matrix. So F=[[1,0,2]] tells us that there is 1 triangle in the mesh and it's 3 vertices are the 1st, 0th, and 2nd rows of **V**.
+The 3D cartesian coordinates of it's vertices are specified by the **V** matrix in (x,y,z) notation. However it alone just tells us where the points are in space. It's the role of the **F** matrix to let us know that these 3 points are actually the vertices of a triangle. The values in the **F** matrix are indices into the **V** matrix. So F=[[1,2,0]] tells us that there is 1 triangle in the mesh and it's 3 vertices are the 1st, 0th, and 2nd rows of **V**.
 
 In practice there are many triangles in a mesh so instead of using nested primative arrays we'll be using Eigen matricies. 
 
@@ -115,7 +115,7 @@ class Mesh
 #endif
 ``` 
 I hope most of that is self-evident at this point. The only interesting bits are the use of a typedef to avoid having to write those log Eigen matrix strings everywhere, and the *GenerateVAO* function.
-A **Vertex Array Object** is how OpenGL keeps track of meshes on the GPU. It involves moving the raw data represented by the **V** and **F** matrices to the GPU and telling OpenGL how to read them. 
+A **Vertex Array Object** is how OpenGL keeps track of meshes on the GPU. It involves moving the raw data represented by the **V** and **F** matrices to the GPU and telling OpenGL how to read them. 
 The *CleanUp* method is used to remove the mesh from the GPU when it no longer needs to be rendered. 
 
 ```c++
