@@ -169,20 +169,9 @@ void Mesh::GenerateVAO()
     glBindBuffer(GL_ARRAY_BUFFER,m_VBO);
     glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
     
-    // Transform F matrix into edge list
     GLuint n_F = m_faces.rows();
-    GLuint indices[6*n_F];
-    for(int i=0,j=0; i < n_F; i++,j+=6)
-    {     
-        indices[j]   = m_faces(i,0);
-        indices[j+1] = m_faces(i,1);
-        
-        indices[j+4] = m_faces(i,1);
-        indices[j+5] = m_faces(i,2);
-        
-        indices[j+2] = m_faces(i,2);
-        indices[j+3] = m_faces(i,0);
-    }
+    GLint indices[3*n_F];
+    Eigen::Map<List3di>( indices, m_faces.rows(), m_faces.cols() ) = m_faces;
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
@@ -203,8 +192,7 @@ void Mesh::CleanUp()
 }
 ```
 
-I won't go into detail here on how this code loads and removes data from the GPU since I'm assuming you know the basics of OpenGL already. The only part worth commenting on is the transformation from a face list **F** into an **edge list**. Unfortunately OpenGL doesn't directly support the {**V**,**F**} data structure we've been working with. Instead it expects an edge list of pairs of indicies.
-
-Continuing with the example of the simple 1 triangle mesh from above our **F** matrix [[1,0,2]] becomes a flattened list [1,0,2,1,0,2]. Mentally you can group them like so [(1,0),(2,1),(0,2)]. In this grouping the 1st index in each pair represents the "head" of an arrow whose base is the second index. So (1,0) represents a vector starting a vertex 0 and ending at vertex 1. If you read the edge list in this manner you'll see that it proceeds counter-clockwise just like our **F** matrix.
+I won't go into detail here on how this code loads and removes data from the GPU since I'm assuming you know the basics of OpenGL already. 
+Since our face list is already in counter-clockwise order we can just copy it into a primative array as is.
 
 {% include links.html %}
