@@ -18,7 +18,7 @@ Whereas **vertex normals** are orthongal to the vertices (what exactly that mean
 It turns out that in order to compute vertex normals we need the face normals, so we'll discuss those first.
 
 ## Face normals
-Since we are dealing with triangle meshes our goal will be to find a vector $$\vec{n}$$ that is orthonal to the triangle face. 
+Since we are dealing with triangle meshes our goal will be to find a vector $$\vec{n}$$ that is orthongal to the triangle face. 
 Lets delve into that sentence. 
 Triangles are typically represented as $$3$$ points, lets call them $$A$$, $$B$$, and $$C$$.
 No matter the orientation of the $$3$$ points one can always define a 2D plane the triangle "lives" in. 
@@ -63,9 +63,9 @@ However for what comes next it is useful to keep the length as is.
 Vertex normals are trickier to conceptualize but easier to compute than the face normals. 
 If you imagine an isolated point in 3D space which direction would you say it is orthongal to?
 There is no correct answer because the question is ill-posed.
-Orthonality implied direction but a point has no direction assoicated with it. 
+Orthonality implies direction but a point has no direction assoicated with it. 
 So how can we compute a vertex normal if that's the case? 
-If instead you imagine our lonely point as part of a surface $$S$$ then it becomes clear which direction the normal vector must point, away from the $$S$$.
+If instead you imagine our lonely point as part of a surface $$S$$ then it becomes clear which direction the normal vector must point, away from $$S$$.
 So if we have local information about the surface our point is sampled from than we can use that information to compute the normal vector at the point.
 Imagined in this manner the normal vector is a function $$\vec{n}(S,p)$$ of both the surface and the point on the surface you are looking at.
 
@@ -74,12 +74,12 @@ Imagined in this manner the normal vector is a function $$\vec{n}(S,p)$$ of both
 Once we discretize our surface into a polygonal mesh it becomes clear then that we need to make use of the surrounding vertices and faces in order to approximate $$\vec{n}(S,p)$$.
 The easiest way to accomplish this is to average the face normals of the faces immediately surrounding the point.
 However an even better idea is a weighted sum, where faces with larger areas contribute more to the normal vector at the point.
-For a smoother varying approximation we could extend our approximation scheme to include faces further away from the point, but this also becomes less accurate as in the limit you all vertices have the same normal. 
+For a smoother varying approximation we could include faces further away from the point, but this also becomes less accurate as in the limit all the vertices have the same normal. 
 
 ## Model and Sphere
 Naturally we will need to update Model to track both the face and vertex normals. 
 We'll be removing the normal matrix from the constructor of *Sphere* as we'll be calculating them at runtime instead.
-You can find the code [here](aaa) and [here]().
+You can find the code [here](https://github.com/AdamSturge/Engine/blob/blog_mesh_normals/mesh.cpp) and [here](https://github.com/AdamSturge/Engine/blob/blog_mesh_normals/sphere.cpp).
 
 
 ## Full algorithm
@@ -149,6 +149,16 @@ void Mesh::ComputeNormals()
 ```
 
 ## Results
+<img src="./images/Mesh Normals/sphere no shared vertices.png" />
+
+Our sphere looks rather different doesn't it?
+This is because of the way we build the sphere at runtime. 
+If you'll revisit the code you'll notice that we recompute the same vertex multiple times but treat is as though it were a seperate entity.
+
+
+As a result of this each vertex is in exactly $$1$$ face, meaning the vertex normals and the face normals are identical. 
+I toyed around with the idea of rewriting the *UVSphereMesh* function so that it reuses vertices properly, but soon enough we'll get around to implementing a proper model loading library.
+Then we can just grab a sphere mesh of the net.
 
 
 {% include links.html %}
