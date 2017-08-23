@@ -126,3 +126,17 @@ entries:
     - title : Mesh Normals
       url   : /mydoc_mesh_normals.html
       output : web
+
+  - title  : Rigid Bodies
+    output : web
+    folderitems :
+
+    - title : Rectangular Prism
+      url : /mydoc_rectangular_prism.html
+      output : web
+
+    #- title : Rotations
+    #  url : /mydoc_rotations.html
+    #  output : web
+
+ 
