@@ -22,9 +22,15 @@ However there is no reason that need be the case.
 $$\vec{u}$$ can be any arbitrary axis. 
 The image shows a point on the surface of the disk $$\vec{x}$$ being rotated to it's new position $$\vec{x}'$$.
 
+One way to represent quaternions algebraically is to use [Euler angles](https://en.wikipedia.org/wiki/Euler_angles).
+These are the familar pitch, yaw, and roll you may have heard referenced in aviation games or television shows. 
+However these suffer from a problem known as [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock). 
+Insead we will be using objects known as [quaternions](https://en.wikipedia.org/wiki/Quaternion).
+
+
 ## Quaternions
 It turns out that the nicest way to manipulate rotations algebraically is the quaternions $$\mathbb{H}$$.
-A quaternion is equivalent to a vector in $$\mathbb{R}^{4}$$ but for one crucial difference, 
+By using these objects we can avoid something called A quaternion is equivalent to a vector in $$\mathbb{R}^{4}$$ but for one crucial difference, 
 $$\mathbb{H}$$ comes equiped with a product operation that makes it a [division algebra](https://en.wikipedia.org/wiki/Division_algebra).
 Meaning it is possible to multiply and divide quaternions. 
 
@@ -81,8 +87,19 @@ Using this embedding the rotated quaternion $$\tilde{x}^{\prime}$$ can be calcul
 \\]
 
 We can extract $$\vec{x}^{\prime}$$ from $$\tilde{x}^{\prime}$$ by ignoring its real part (which will be $$0$$ anyways).
+For a proof of this statement see the [wikipedia article](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Proof_of_the_quaternion_rotation_identity).
+It involves multiplying everything out and some algebra tricks to put the result into form of the [Rodrigues rotation formula](https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula).  
 
 ## Relationship between quaternions and rotation matrices
-TO DO: FILL THIS IN
-
+To convert a quaternion $$\tilde{q}=(q_{r},q_{i},q_{j},q_{k})$$ to a rotation matrix $$R$$ we make use of the following formula
+\\[
+R= 
+\begin{bmatrix}
+1-2s(q_{j}^{2}+q_{k}^{2}) & 2s(q_{i}q_{j} - q_{k}q_{r}) & 2s(q_{i}q_{k} + q_{j}q_{r}) \\\
+2s(q_{i}q_{j} + q_{k}q_{r}) & 1 - 2s(q_{i}^{2} + q_{k}^{2}) & 2s(q_{j}q_{k} - q_{i}q_{r}) \\\
+2s(q_{i}q_{k} - q_{j}q_{r}) & 2s(q_{j}q_{k} + q_{i}q_{r}) & 1-2s(q_{i}^{2} + q_{j}^{2})
+\end{bmatrix}
+\\]
+where $$s = \frac{1}{||q||^{2}}$$.
+This matrix R will form the top-left $$3 \times 3$$ block of our model matrix.
 {% include links.html %}
