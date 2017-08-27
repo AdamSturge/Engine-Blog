@@ -8,7 +8,7 @@ toc : true
 ---
 
 ## Overview
-In this artcle we'll discus what exactly is a rotation and how do we represent one in a computer.
+In this article we'll discuss what exactly is a rotation and how do we represent one in a computer.
 
 ## Representing a rotation geometrically
 First lets talk about what a rotation is. 
@@ -22,7 +22,7 @@ However there is no reason that need be the case.
 $$\vec{u}$$ can be any arbitrary axis. 
 The image shows a point on the surface of the disk $$\vec{x}$$ being rotated to it's new position $$\vec{x}'$$.
 
-One way to represent quaternions algebraically is to use [Euler angles](https://en.wikipedia.org/wiki/Euler_angles).
+One way to represent rotations algebraically is to use [Euler angles](https://en.wikipedia.org/wiki/Euler_angles).
 These are the familar pitch, yaw, and roll you may have heard referenced in aviation games or television shows. 
 However these suffer from a problem known as [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock). 
 Insead we will be using objects known as [quaternions](https://en.wikipedia.org/wiki/Quaternion).
@@ -30,7 +30,7 @@ Insead we will be using objects known as [quaternions](https://en.wikipedia.org/
 
 ## Quaternions
 It turns out that the nicest way to manipulate rotations algebraically is the quaternions $$\mathbb{H}$$.
-By using these objects we can avoid something called A quaternion is equivalent to a vector in $$\mathbb{R}^{4}$$ but for one crucial difference, 
+A quaternion is equivalent to a vector in $$\mathbb{R}^{4}$$ but for one crucial difference, 
 $$\mathbb{H}$$ comes equiped with a product operation that makes it a [division algebra](https://en.wikipedia.org/wiki/Division_algebra).
 Meaning it is possible to multiply and divide quaternions. 
 
@@ -57,19 +57,19 @@ where $$\cdot$$ and $$\times$$ are the familar dot product and cross product fro
 Keeping with the interpretation of $$\vec{v}$$ as the imaginary part of $$\tilde{q}$$ we can define a **complex conjugate** which simply involves the negation of $$\vec{v}$$.
 
 \\[
-\tilde{q}^{\star} = (r,-\vec{v}) 
+\tilde{q}^{*} = (r,-\vec{v}) 
 \\]
 
 ### Norm
 Like vectors in $$\mathbb{R}^{n}$$ quaternions have a notion of length that is defined through a norm
 \\[
-||\tilde{q}||^{2} = \tilde{q}\tilde{q}^{\star} = r^{2} + ||\vec{v}||^{2}
+||\tilde{q}||^{2} = \tilde{q}\tilde{q}^{*} = r^{2} + ||\vec{v}||^{2}
 \\]
 
 ### Multiplicative inverse
 Using the relationship between the conjugate and the norm we can define the inverse of a quaterion to be 
 \\[
-\tilde{q}^{-1} = \frac{\tilde{q}^{\star}}{||\tilde{q}||^{2}}
+\tilde{q}^{-1} = \frac{\tilde{q}^{*}}{||\tilde{q}||^{2}}
 \\]
 Verify for yourself that $$\tilde{q}\tilde{q}^{-1} = 1$$
 
@@ -77,7 +77,7 @@ Verify for yourself that $$\tilde{q}\tilde{q}^{-1} = 1$$
 So how do we use quaternions to compute rotations?
 We can represent a rotation given by an axis $$\hat{u}$$ and an angle $$\theta$$ as a quaternion by utilzing an extension of [Euler's formula](https://en.wikipedia.org/wiki/Euler%27s_formula)
 \\[
-\tilde{q} = e^{\frac{\theta}{2}\vec{v}} = \left(\cos\left(\frac{\theta}{2}\right),\sin\left(\frac{\theta}{2}\right)\vec{v}\right)
+\tilde{q} = \left(\cos\left(\frac{\theta}{2}\right),\sin\left(\frac{\theta}{2}\right)\hat{u}\right)
 \\]
 
 Now, we can embed an arbitrary point $$\vec{x} \in \mathbb{R}^{3}$$ into $$\mathbb{H}$$ by creating a new quaterion $$\tilde{x} = (0,\vec{x})$$.
@@ -102,4 +102,26 @@ R=
 \\]
 where $$s = \frac{1}{||q||^{2}}$$.
 This matrix R will form the top-left $$3 \times 3$$ block of our model matrix.
+
+## Implementation
+The implementation of Quaternion is mostly an exercise in operator overloading. 
+I won't bother to inline the code but I encourage you to look it over:
+[quaternion.h](https://github.com/AdamSturge/Engine/blob/blog_rotation/include/quaternion.h) [quaternion.cpp](https://github.com/AdamSturge/Engine/blob/blog_rotation/include/quaternion.h)
+
+
+The only other matter at hand is to modify *PhysicsEntity* to store an orientation in the form of a Quaternion instance. 
+The concrete realizations of *PhysicsEntity* and *Model* can load the orientation into the model matrix like so
+```
+m_model_matrix.block(0,0,3,3) = m_orientation.toRotationMatrix();
+```
+This must be done in the constructors and in the *OnUpdateFromBuffer* methods
+
+## Results
+
+<img src="./images/Rotation/rotated cube.png" />
+
+Here we've rotated the cube by $$45$$ degrees about the $$y$$ axis. 
+
+[code](https://github.com/AdamSturge/Engine/tree/blog_rotation)
+
 {% include links.html %}

@@ -135,8 +135,8 @@ entries:
       url : /mydoc_rectangular_prism.html
       output : web
 
-    #- title : Rotations
-    #  url : /mydoc_rotations.html
-    #  output : web
+    - title : Rotations
+      url : /mydoc_rotations.html
+      output : web
 
  
