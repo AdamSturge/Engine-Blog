@@ -107,7 +107,7 @@ entries:
       url : /mydoc_linear_drag_force.html
       output : web
     
-    - title : Hooke's law
+    - title : Hooke's Law
       url : /mydoc_hookes_law.html
       output : web
 
@@ -122,3 +122,21 @@ entries:
     - title : Material
       url : /mydoc_material.html
       output : web
+
+    - title : Mesh Normals
+      url   : /mydoc_mesh_normals.html
+      output : web
+
+  - title  : Rigid Bodies
+    output : web
+    folderitems :
+
+    - title : Rectangular Prism
+      url : /mydoc_rectangular_prism.html
+      output : web
+
+    - title : Rotations
+      url : /mydoc_rotations.html
+      output : web
+
+ 

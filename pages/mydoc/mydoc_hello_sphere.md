@@ -31,60 +31,60 @@ So in order to generate a sphereical mesh we will evaluate the parametric equati
 Here's what that looks like in C++
 
 ```c++
-GLfloat radius = 1.0f;
-GLuint numU = 20;
-GLuint numV = 20;
-
-GLfloat uStart = 0.0f;
-GLfloat vStart = 0.0f;
-GLfloat uEnd = 2*M_PI;
-GLfloat vEnd = M_PI;
-
-GLfloat uStep = (uEnd - uStart)/numU;
-GLfloat vStep = (vEnd - vStart)/numV;
-
-List3df vertices(numU*numV*4,3);
-List3di faces(numU*numV*2,3);
-
-int vIndex = -1;
-int fIndex = -1;
-int eIndex = 0;
-for(int i = 0; i < numU; i++)
+void Sphere::UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh& mesh)
 {
-    GLfloat u = uStart + i*uStep;
-    GLfloat un = (i+1 == numU) ? uEnd : (u + uStep);
-    for(int j = 0; j < numV; j++)
+    GLfloat uStart = 0.0f;
+    GLfloat vStart = 0.0f;
+    GLfloat uEnd = 2*M_PI;
+    GLfloat vEnd = M_PI;
+
+    GLfloat uStep = (uEnd - uStart)/numU;
+    GLfloat vStep = (vEnd - vStart)/numV;
+
+    List3df vertices(numU*numV*4,3);
+    List3di faces(numU*numV*2,3);
+
+    int vIndex = -1;
+    int fIndex = -1;
+    int eIndex = 0;
+    for(int i = 0; i < numU; i++)
     {
-        GLfloat v = vStart + j*vStep;
-        GLfloat vn = (j+1 == numV) ? vEnd : (v + vStep);
+        GLfloat u = uStart + i*uStep;
+        GLfloat un = (i+1 == numU) ? uEnd : (u + uStep);
+        for(int j = 0; j < numV; j++)
+        {
+            GLfloat v = vStart + j*vStep;
+            GLfloat vn = (j+1 == numV) ? vEnd : (v + vStep);
 
-        Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)); 
-        Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn));
-        Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)); 
-        Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn));
+            Vector3Gf p0 = radius*Vector3Gf(cos(u)*sin(v),cos(v),sin(u)*sin(v)); 
+            Vector3Gf p1 = radius*Vector3Gf(cos(u)*sin(vn),cos(vn),sin(u)*sin(vn));
+            Vector3Gf p2 = radius*Vector3Gf(cos(un)*sin(v),cos(v),sin(un)*sin(v)); 
+            Vector3Gf p3 = radius*Vector3Gf(cos(un)*sin(vn),cos(vn),sin(un)*sin(vn));
 
-        vertices.row(++vIndex) = p0;
-        vertices.row(++vIndex) = p1;
-        vertices.row(++vIndex) = p2;
-        vertices.row(++vIndex) = p3;
+            vertices.row(++vIndex) = p0;
+            vertices.row(++vIndex) = p1;
+            vertices.row(++vIndex) = p2;
+            vertices.row(++vIndex) = p3;
 
-        fIndex++; 
+            fIndex++;
+            
+            faces(fIndex,0) = eIndex+0;
+            faces(fIndex,1) = eIndex+2;
+            faces(fIndex,2) = eIndex+1;
 
-        faces(fIndex,0) = eIndex+1;
-        faces(fIndex,1) = eIndex+0;
-        faces(fIndex,2) = eIndex+2;
+            fIndex++;
 
-        fIndex++;           
-        
-        faces(fIndex,0) = eIndex+1;
-        faces(fIndex,1) = eIndex+2;
-        faces(fIndex,2) = eIndex+3;
+            faces(fIndex,0) = eIndex+2;
+            faces(fIndex,1) = eIndex+3;
+            faces(fIndex,2) = eIndex+1;
 
-        eIndex += 4;
+            eIndex += 4;
+
+        }
     }
-}
 
-mesh = Mesh(vertices,faces);
+    mesh = Mesh(vertices,faces);
+};
 ```
 
 Each inner loop creates 2 triangles like so
@@ -159,7 +159,7 @@ Sphere::Sphere(GLfloat radius, Vector3Gf position) : Model()
 };
 
 void Sphere::UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint numV, Mesh& mesh)
-{  
+{
     GLfloat uStart = 0.0f;
     GLfloat vStart = 0.0f;
     GLfloat uEnd = 2*M_PI;
@@ -193,25 +193,25 @@ void Sphere::UVSphereMesh(const GLfloat radius, const GLuint numU, const GLuint 
             vertices.row(++vIndex) = p2;
             vertices.row(++vIndex) = p3;
 
-            fIndex++; 
-
-            faces(fIndex,0) = eIndex+1;
-            faces(fIndex,1) = eIndex+0;
-            faces(fIndex,2) = eIndex+2;
-
-            fIndex++;           
+            fIndex++;
             
-            faces(fIndex,0) = eIndex+1;
+            faces(fIndex,0) = eIndex+0;
             faces(fIndex,1) = eIndex+2;
-            faces(fIndex,2) = eIndex+3;
+            faces(fIndex,2) = eIndex+1;
+
+            fIndex++;
+
+            faces(fIndex,0) = eIndex+2;
+            faces(fIndex,1) = eIndex+3;
+            faces(fIndex,2) = eIndex+1;
 
             eIndex += 4;
+
         }
     }
 
     mesh = Mesh(vertices,faces);
 };
-
 ```
 
 ## Rendering
