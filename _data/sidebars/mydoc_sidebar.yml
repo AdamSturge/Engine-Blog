@@ -139,4 +139,6 @@ entries:
       url : /mydoc_rotations.html
       output : web
 
- 
+    - title : Rotational Dynamics
+      url : /mydoc_rotational_dynamics.html
+      output : web 
