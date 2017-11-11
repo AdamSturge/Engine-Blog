@@ -75,6 +75,8 @@ void ExplicitEuler::Solve(
 </video>
 Now our cube spins.
 
+As always, [here](https://github.com/AdamSturge/Engine/tree/blog_rotational_explicit_euler) is the code
+
 As a side note I'm begining to feel like the normals for the cube are messed up based on how it's being lit up.
 I should implement a model loading library soon
 
