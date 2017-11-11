@@ -142,3 +142,7 @@ entries:
     - title : Rotational Dynamics
       url : /mydoc_rotational_dynamics.html
       output : web 
+
+    - title : Rotational Explicit Euler
+      url : /mydoc_rotational_explicit_euler.html
+      output : web
