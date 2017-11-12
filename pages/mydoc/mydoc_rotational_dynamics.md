@@ -13,7 +13,7 @@ To do that we will need a governing equation.
 For linear motion we used Newton's second law, so it's not unreasonable to expect something analagous to apply here. 
 
 ## Orientation vs rotation
-Before we move one I want to clarify some terminology.
+Before we move on I want to clarify some terminology.
 An **orientation** refers to how an object is oriented about a given axis.
 A **rotation** is the act of updating your orientation.
 Put another way, an orientation is a state, whereas a rotation is a transformation.
