@@ -103,7 +103,7 @@ There are 2 relevent coordinate systems we need to consider, model coordinates a
 It is often preferable to express $$J$$ in model coordinates.
 There we have the capability to orient the object in such a way that $$J$$ is easy to compute.
 In fact, as a real symetric matrix, there exists a coordinate system where $$J$$ is a diagonal matrix.
-However we will be expressing *torque* and *angular velocity* in world coordinates so we need to know how to transfrom $$J$$ between coordinate systems.
+However we will be expressing *torque*, $$\vec{\tau}$$, and $$\vec{w}$$ in world coordinates so we need to know how to transfrom $$J$$ between coordinate systems.
 
 First lets consider translations. 
 Consider the translation $$x \rightarrow x+5$$. 
@@ -116,7 +116,7 @@ So to transform $$J$$ from model to world coordinates we need to multiply it by 
 Since the model matrix changes every time interval this means we'll have to perform this multiplication every cycle. 
 However this is much better than recomputing $$J$$ from scratch every cycle.
 
-It is possible to instead transport *torque* and *angular velocity* to model coordinates. 
+It is possible to instead transport $$\vec{\tau}$$ and $$\vec{w}$$ to model coordinates. 
 There we have the benefit of $$J$$ remaining a diagonal matrix. 
 However since the model coordinate system is rotating with respect to the world coordinate system Euler's second law becomes a little more complicated. 
 I may do an article about both ways to performing these calculations as I'm curious which is faster. 
