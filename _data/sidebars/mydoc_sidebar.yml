@@ -146,3 +146,7 @@ entries:
     - title : Rotational Explicit Euler
       url : /mydoc_rotational_explicit_euler.html
       output : web
+
+    - title : Inertia Tensor Theory
+      url   : /mydoc_inertia_tensor_theory.html
+      output : web
