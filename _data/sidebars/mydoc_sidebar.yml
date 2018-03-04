@@ -150,3 +150,7 @@ entries:
     - title : Inertia Tensor Theory
       url   : /mydoc_inertia_tensor_theory.html
       output : web
+
+    - title : Intertia Tensor Implementation
+      url   : /mydoc_inertia_tensor_impl.html
+      output : web
